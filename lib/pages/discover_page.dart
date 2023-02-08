@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:bluetooth_bloc/blocs/blocs.dart';
 import 'package:bluetooth_bloc/controllers/controllers.dart';
-import 'package:flutter/material.dart';
+import 'package:bluetooth_bloc/views/views.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiscoverPage extends StatelessWidget {
@@ -39,20 +40,33 @@ class _DiscoverPageBody extends StatelessWidget {
           if (state.status == DiscoverDevicesStatus.finding) {
             return const Center(child: CircularProgressIndicator());
           }
-          return const Center(child: Text('Terminado'));
+          return DevicesListView(devices: state.results);
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: BlocBuilder<DiscoverDevicesBloc, DiscoverDevicesState>(
-          builder: (context, state) {
-            if (state.status != DiscoverDevicesStatus.finding) {
-              return const Icon(Icons.stop_rounded);
-            } else {
-              return const Icon(Icons.replay_rounded);
-            }
-          },
-        ),
+      floatingActionButton: const _startDiscoverButton(),
+    );
+  }
+}
+
+class _startDiscoverButton extends StatelessWidget {
+  const _startDiscoverButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        context.read<DiscoverDevicesBloc>().add(OnStartDiscoverDevices());
+      },
+      child: BlocBuilder<DiscoverDevicesBloc, DiscoverDevicesState>(
+        builder: (context, state) {
+          if (state.status != DiscoverDevicesStatus.finding) {
+            return const Icon(Icons.stop_rounded);
+          } else {
+            return const Icon(Icons.replay_rounded);
+          }
+        },
       ),
     );
   }
