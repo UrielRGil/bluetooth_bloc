@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:bluetooth_bloc/blocs/blocs.dart';
-import 'package:bluetooth_bloc/controllers/controllers.dart';
 import 'package:bluetooth_bloc/views/views.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiscoverPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<DiscoverDevicesBloc>(
-      create: (context) => DiscoverDevicesBloc(BluetoothController()),
-      child: const _DiscoverPageBody(),
-    );
+    return const _DiscoverPageBody();
   }
 }
 
