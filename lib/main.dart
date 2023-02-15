@@ -20,10 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => DiscoverDevicesBloc(BluetoothController()),
-        ),
-        BlocProvider(
-          create: (context) => ConnectDeviceBloc(BluetoothController()),
+          create: (context) => DeviceBloc(BluetoothController()),
         ),
       ],
       child: MaterialApp(

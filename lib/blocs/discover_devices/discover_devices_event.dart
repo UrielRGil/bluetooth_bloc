@@ -17,3 +17,9 @@ class OnDiscoverDevicesCompleted extends DiscoverDevicesEvent {
   @override
   List<Object> get props => [results];
 }
+
+class OnBondNewDeviceEvent extends DiscoverDevicesEvent {
+  final BluetoothDevice device;
+
+  const OnBondNewDeviceEvent(this.device);
+}

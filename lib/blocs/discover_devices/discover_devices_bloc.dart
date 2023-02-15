@@ -21,6 +21,14 @@ class DiscoverDevicesBloc
     });
     on<OnStartDiscoverDevices>(_onStartDiscoverDevices);
     on<OnDiscoverDevicesCompleted>(_onDiscoverDevicesCompleted);
+    on<OnBondNewDeviceEvent>(_onBondNewDeviceEvent);
+  }
+
+  void _onBondNewDeviceEvent(
+      OnBondNewDeviceEvent event, Emitter<DiscoverDevicesState> emit) async {
+    log('Bonding with ${event.device.address}');
+    final resp = await _bluetoothController.serialInstance
+        .bondDeviceAtAddress(event.device.address);
   }
 
   void _onStartDiscoverDevices(

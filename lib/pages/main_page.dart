@@ -10,9 +10,9 @@ class MainPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BlocBuilder<ConnectDeviceBloc, ConnectDeviceState>(
+          BlocBuilder<DeviceBloc, DeviceState>(
             builder: (context, state) {
-              if (state.status == ConnectDeviceStatus.connected) {
+              if (state.status == DeviceStatus.connected) {
                 return Text('Dispositivo emparejado ${state.device?.address}');
               }
               return const Text('Sin despositivo emparejado');
